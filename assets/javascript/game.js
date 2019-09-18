@@ -1,5 +1,3 @@
-
-
 var shownWins = document.getElementById("shownWins")
 var shownLosses = document.getElementById("shownLosses")
 var shownGuessesLeft = document.getElementById("shownGuessesLeft")
@@ -25,7 +23,6 @@ shownGuessesLeft.textContent = guessesLeft;
 
 document.onkeyup = function(event) {
 var playerChoice = event.key
-
     if (letters.indexOf(event.key) === -1) {
         alert("Please enter only letters from the a to the z")
         console.log("Invalid Player Choice: " + event.key)
@@ -35,17 +32,7 @@ var playerChoice = event.key
         console.log("Player choice: " + playerChoice)
         if (guessesLeft > 0) {
             if (playerChoice === computerRandom) {
-                wins = wins + 1
-                shownWins.textContent = wins
-                guessesLeft = 9
-                shownGuessesLeft.textContent = guessesLeft
-                guessesSoFar = []
-                shownGuessesSoFar.textContent = guessesSoFar
-                computerRandom = letters[Math.floor(Math.random()*letters.length)]
-                console.log("---------------------------------------")
-                console.log("New Computer choice: " + computerRandom)
-                console.log("---------------------------------------")
-
+                refreshScore(wins, shownWins)
             }
             else {
                 guessesLeft = guessesLeft - 1
@@ -54,19 +41,9 @@ var playerChoice = event.key
                 shownGuessesSoFar.textContent = guessesSoFar
             }
         }
-
-            if (guessesLeft === 0) {
-                losses = losses + 1
-                shownLosses.textContent = losses
-                guessesLeft = 9
-                shownGuessesLeft.textContent = guessesLeft
-                guessesSoFar = []
-                shownGuessesSoFar.textContent = guessesSoFar
-                computerRandom = letters[Math.floor(Math.random()*letters.length)]
-                console.log("---------------------------------------")
-                console.log("New Computer choice: " + computerRandom)
-                console.log("---------------------------------------")
-            }
+        else {
+            refreshScore(losses, shownLosses)
+        }
     }
 }
 
