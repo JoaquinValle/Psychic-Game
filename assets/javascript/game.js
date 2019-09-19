@@ -4,6 +4,7 @@ var shownWins = document.getElementById("shownWins")
 var shownLosses = document.getElementById("shownLosses")
 var shownGuessesLeft = document.getElementById("shownGuessesLeft")
 var shownGuessesSoFar = document.getElementById("shownGuessesSoFar")
+var shownLetter = document.getElementById("shownLetter")
 
 var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
                "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
@@ -25,6 +26,7 @@ shownGuessesLeft.textContent = guessesLeft;
 
 document.onkeyup = function(event) {
 var playerChoice = event.key
+shownLetter.textContent = ""
 
     if (letters.indexOf(playerChoice) === -1) {
         alert("Please enter only letters from the a to the z")
@@ -38,6 +40,7 @@ var playerChoice = event.key
                 if (playerChoice === computerRandom) {
                     wins = wins + 1
                     refreshScore(wins, shownWins)
+                    shownLetter.textContent = "---------> Congrats!! It was indeed '" + computerRandom + "'"
                 }
                 else {
                     guessesLeft = guessesLeft - 1
@@ -54,10 +57,11 @@ var playerChoice = event.key
         if (guessesLeft === 0) {
             losses = losses + 1
             refreshScore(losses,shownLosses)
+            shownLetter.textContent = "---------> Bummer... It was '" + computerRandom + "'"
         }
     }
-
 }
+
 function refreshScore(x, y) {
     y.textContent = x
     guessesLeft = 9
