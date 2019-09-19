@@ -1,3 +1,5 @@
+
+
 var shownWins = document.getElementById("shownWins")
 var shownLosses = document.getElementById("shownLosses")
 var shownGuessesLeft = document.getElementById("shownGuessesLeft")
@@ -23,32 +25,40 @@ shownGuessesLeft.textContent = guessesLeft;
 
 document.onkeyup = function(event) {
 var playerChoice = event.key
-    if (letters.indexOf(event.key) === -1) {
+
+    if (letters.indexOf(playerChoice) === -1) {
         alert("Please enter only letters from the a to the z")
-        console.log("Invalid Player Choice: " + event.key)
+        console.log("Invalid Player Choice: " + playerChoice)
         console.log("---------------------------------------")
     }
     else {
         console.log("Player choice: " + playerChoice)
         if (guessesLeft > 0) {
-            if (playerChoice === computerRandom) {
-                refreshScore(wins, shownWins)
+            if (guessesSoFar.indexOf(playerChoice) === -1) {
+                if (playerChoice === computerRandom) {
+                    wins = wins + 1
+                    refreshScore(wins, shownWins)
+                }
+                else {
+                    guessesLeft = guessesLeft - 1
+                    shownGuessesLeft.textContent = guessesLeft
+                    guessesSoFar.push(event.key)
+                    shownGuessesSoFar.textContent = guessesSoFar
+                }
             }
             else {
-                guessesLeft = guessesLeft - 1
-                shownGuessesLeft.textContent = guessesLeft
-                guessesSoFar.push(" " + event.key)
-                shownGuessesSoFar.textContent = guessesSoFar
-            }
+                alert("You already chose " + playerChoice + " letter. Please chose a different one.")
+                console.log("Duplicated Letter: " + playerChoice)
+            }    
         }
-        else {
-            refreshScore(losses, shownLosses)
+        if (guessesLeft === 0) {
+            losses = losses + 1
+            refreshScore(losses,shownLosses)
         }
     }
-}
 
+}
 function refreshScore(x, y) {
-    x = x + 1
     y.textContent = x
     guessesLeft = 9
     shownGuessesLeft.textContent = guessesLeft
