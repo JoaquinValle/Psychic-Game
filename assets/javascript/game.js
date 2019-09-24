@@ -15,14 +15,14 @@ console.log("---------------------------------------")
 console.log("Computer choice: " + computerRandom)
 console.log("---------------------------------------")
 
-var wins = 0;
-var losses = 0;
-var guessesLeft = 9;
-var guessesSoFar = [];
+var wins = 0
+var losses = 0
+var guessesLeft = 9
+var guessesSoFar = []
 
-shownWins.textContent = wins;
-shownLosses.textContent = losses;
-shownGuessesLeft.textContent = guessesLeft;
+shownWins.textContent = wins
+shownLosses.textContent = losses
+shownGuessesLeft.textContent = guessesLeft
 
 document.onkeyup = function(event) {
 var playerChoice = event.key
@@ -39,8 +39,8 @@ shownLetter.textContent = ""
             if (guessesSoFar.indexOf(playerChoice) === -1) {
                 if (playerChoice === computerRandom) {
                     wins = wins + 1
-                    refreshScore(wins, shownWins)
                     shownLetter.textContent = "---------> Congrats!! It was indeed '" + computerRandom + "'"
+                    refreshScore(wins, shownWins)
                 }
                 else {
                     guessesLeft = guessesLeft - 1
@@ -56,13 +56,16 @@ shownLetter.textContent = ""
         }
         if (guessesLeft === 0) {
             losses = losses + 1
-            refreshScore(losses,shownLosses)
             shownLetter.textContent = "---------> Bummer... It was '" + computerRandom + "'"
+            refreshScore(losses,shownLosses)
         }
-    }
+    }    
 }
 
 function refreshScore(x, y) {
+    console.log("Initial Score " + x)
+    // x = x + 1;
+    console.log("Refreshed Score " + x)
     y.textContent = x
     guessesLeft = 9
     shownGuessesLeft.textContent = guessesLeft
